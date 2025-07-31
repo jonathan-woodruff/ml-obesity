@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 load_dotenv()  #load environment variables from .env
 
@@ -20,13 +22,29 @@ df = pd.read_csv('obesity-data.csv')
 print(df.head())
 print(df.info())
 
-print(df.columns[df.isnull().sum() > 0]) #check for null values
+### STEP 3: EXPLORATORY DATA ANALYSIS
 
-#take the floor of the age column values and convert the age variable to int
-take_floor = lambda x: np.floor(x)
-df['Age'] = df['Age'].apply(take_floor).astype(int)
+#Provide an order to the ordinal variables
+df['CAEC'] = pd.Categorical(df['CAEC'], ['no', 'Sometimes', 'Frequently', 'Always'], ordered=True)
+df['CALC'] = pd.Categorical(df['CALC'], ['no', 'Sometimes', 'Frequently', 'Always'], ordered=True)
 
-### STEP 3: DATA SPLIT
+#show histograms for Age, Height, Weight
+#sns.histplot(x='Weight', data=df)
+#plt.show()
+#plt.close()
+
+#show value counts for categorical data
+print(df['Gender'].value_counts())
+print(df['family_history_with_overweight'].value_counts())
+print(df['FAVC'].value_counts())
+print(df['CAEC'].value_counts())
+print(df['SMOKE'].value_counts())
+print(df['SCC'].value_counts())
+print(df['CALC'].value_counts())
+print(df['MTRANS'].value_counts())
+
+
+### STEP 5: DATA SPLIT
 X = df.drop(columns=['NObeyesdad'])
 y = df['NObeyesdad']
 
