@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from dotenv import load_dotenv
+from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
 import os
 import pandas as pd
 import numpy as np
@@ -43,10 +45,20 @@ print(df['SCC'].value_counts())
 print(df['CALC'].value_counts())
 print(df['MTRANS'].value_counts())
 
+### Step 4: MODEL SELECTION
+# We'll start with linear SVC
 
-### STEP 5: DATA SPLIT
+### STEP 5: FEATURE ENGINEERING
+X_numeric = df['Age', 'Height', 'Weight']
+scaler = preprocessing.StandardScaler().fit(X_numeric)
+X_numeric_scaled = scaler.transform(X_numeric)
+
+### STEP 6: DATA SPLIT
 X = df.drop(columns=['NObeyesdad'])
 y = df['NObeyesdad']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20)
+
 
 @app.route('/', methods=["GET", "POST"])
 def index():
