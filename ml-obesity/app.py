@@ -73,33 +73,32 @@ print(score_train)
 print(score_test)
 
 ### STEP 9: HYPERPARAMETER TUNING USING GRID SEARCH
-## Initialize hyperparameters
+# Initialize hyperparameters
 parameters = {
-    'kernel': ['linear'], 
-    'C': np.logspace(-2, 10, 13),
+    'kernel': ['linear', 'rbf'], 
+    'C': [.01, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1],
     'gamma': np.logspace(-9, 3, 13)
 }
 
-##Setting up Grid Search
+#Set up Grid Search
 gs = GridSearchCV(classifier, parameters)
 
-##fit the grid search classifier to the training data
+#fit the grid search classifier to the training data
 gs.fit(X_train, y_train)
 print(gs.best_estimator_)
 print(gs.best_params_)
 
-##compare scores between how the model does on training data (gs.best_score_) and test data
+#compare scores between how the model does on training data (gs.best_score_) and test data
 best_score = gs.best_score_
 test_score = gs.score(X_test, y_test)
 print(best_score)
 print(test_score)
 
-##get a nice view of the hyperparameter configurations and their scores
+#get a nice view of the hyperparameter configurations and their scores
 hyperparameter_grid = pd.DataFrame(gs.cv_results_['params'])
 grid_scores = pd.DataFrame(gs.cv_results_['mean_test_score'], columns=['score'])
 scores = pd.concat([hyperparameter_grid, grid_scores], axis = 1)
 print(scores) 
-
 
 @app.route('/', methods=["GET", "POST"])
 def index():
