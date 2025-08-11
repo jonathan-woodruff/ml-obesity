@@ -21,8 +21,8 @@ df = pd.read_csv('obesity-data.csv')
 
 ### STEP 2: DATA CLEANING
 #Get familiar with the data
-print(df.head())
-print(df.info())
+#print(df.head())
+#print(df.info())
 
 ### STEP 3: EXPLORATORY DATA ANALYSIS
 #show histograms for Age, Height, Weight
@@ -67,11 +67,12 @@ X_test = scaler.transform(X_test)
 ### STEP 8: FIT THE MODEL
 classifier = SVC(kernel="linear")
 classifier.fit(X_train, y_train)
-score_train = classifier.score(X_train, y_train)
-score_test = classifier.score(X_test, y_test)
-print(score_train)
-print(score_test)
+#score_train = classifier.score(X_train, y_train)
+#score_test = classifier.score(X_test, y_test)
+#print(score_train)
+#print(score_test)
 
+"""
 ### STEP 9: HYPERPARAMETER TUNING USING GRID SEARCH
 # Initialize hyperparameters
 parameters = {
@@ -99,6 +100,7 @@ hyperparameter_grid = pd.DataFrame(gs.cv_results_['params'])
 grid_scores = pd.DataFrame(gs.cv_results_['mean_test_score'], columns=['score'])
 scores = pd.concat([hyperparameter_grid, grid_scores], axis = 1)
 print(scores) 
+"""
 
 @app.route('/', methods=["GET", "POST"])
 def index():
