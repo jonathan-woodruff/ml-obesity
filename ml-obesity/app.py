@@ -1,9 +1,11 @@
 from flask import Flask, render_template
+from flask_wtf import FlaskForm
+from wtforms import SubmitField, RadioField
 from dotenv import load_dotenv
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from forms import Gender
+from forms import Obesity
 import os
 import pandas as pd
 
@@ -39,4 +41,20 @@ def fit_model():
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    return render_template('gender.html')
+    form = Obesity(csrf_enabled=False)
+    gender = form.gender.data
+    age = form.age.data
+    height = form.height.data
+    weight = form.weight.data
+    family = form.family.data
+    favc = form.favc.data
+    fcvc = form.fcvc.data
+    ncp = form.ncp.data
+    caec = form.caec.data
+    smoke = form.smoke.data
+    ch2o = form.ch2o.data
+    scc = form.scc.data
+    faf = form.faf.data
+    if form.validate_on_submit(): #if valid submission
+        print(gender)
+    return render_template('gender.html', template_form=form)

@@ -1,24 +1,210 @@
 {% extends "base.html" %}
 {% block content %}
-
 <main id="main-container" class="container py-2 px-3 mx-auto">
     <div class="row">
-        <div class="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
-            <h2 class="text-center mb-3">Select your gender</h2>
+        <form action="/" method="POST" class="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+            {{ template_form.hidden_tag() }}
+            <h2 class="text-center mb-3">Enter your information</h2>
+
+            <h3 class="h5">Gender:</h3>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="female" id="female">
+                <input class="form-check-input" type="radio" name="gender" id="female">
                 <label class="form-check-label" for="female">
                     Female
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="male" id="male">
+                <input class="form-check-input" type="radio" name="gender" id="male">
                 <label class="form-check-label" for="male">
                     Male
                 </label>
             </div>
-        </div>
+
+            <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" aria-describedby="ageHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="height" class="form-label">Height</label>
+                <input type="number" class="form-control" id="height" aria-describedby="heightHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="weight" class="form-label">Weight</label>
+                <input type="number" class="form-control" id="weight" aria-describedby="weightHelp">
+            </div>
+
+            <h3 class="h5">Has a family member of yours struggled with being overweight?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="family" id="family-yes">
+                <label class="form-check-label" for="family-yes">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="family" id="family-no">
+                <label class="form-check-label" for="family-no">
+                    No
+                </label>
+            </div>
+
+            <h3 class="h5">Do you eat high-caloric food frequently?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="favc" id="favc-yes">
+                <label class="form-check-label" for="favc-yes">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="favc" id="favc-no">
+                <label class="form-check-label" for="favc-no">
+                    No
+                </label>
+            </div>
+
+            <h3 class="h5">Do you usually eat vegetables with your meals?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="fcvc" id="fcvc-always">
+                <label class="form-check-label" for="fcvc-always">
+                    Always
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="fcvc" id="fcvc-sometimes">
+                <label class="form-check-label" for="fcvc-sometimes">
+                    Sometimes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="fcvc" id="fcvc-never">
+                <label class="form-check-label" for="fcvc-never">
+                    Never
+                </label>
+            </div>
+
+            <h3 class="h5">How many meals do you have daily?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ncp" id="ncp-1">
+                <label class="form-check-label" for="ncp-1">
+                    Between one and two meals
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ncp" id="ncp-2">
+                <label class="form-check-label" for="ncp-2">
+                    Three meals
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ncp" id="ncp-3">
+                <label class="form-check-label" for="ncp-3">
+                    More than three meals
+                </label>
+            </div>
+
+            <h3 class="h5">Do you eat any food between meals?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="caec" id="caec-always">
+                <label class="form-check-label" for="caec-always">
+                    Always
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="caec" id="caec-frequently">
+                <label class="form-check-label" for="caec-frequently">
+                    Frequently
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="caec" id="caec-sometimes">
+                <label class="form-check-label" for="caec-sometimes">
+                    Sometimes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="caec" id="caec-never">
+                <label class="form-check-label" for="caec-never">
+                    Never
+                </label>
+            </div>
+
+            <h3 class="h5">Do you smoke?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="smoke" id="smoke-yes">
+                <label class="form-check-label" for="smoke-yes">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="smoke" id="smoke-no">
+                <label class="form-check-label" for="smoke-no">
+                    No
+                </label>
+            </div>
+
+            <h3 class="h5">How much water do you drink daily?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ch2o" id="ch2o-1">
+                <label class="form-check-label" for="ch2o-1">
+                    Less than a liter
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ch2o" id="ch2o-2">
+                <label class="form-check-label" for="ch2o-2">
+                    Between one and two liters
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ch2o" id="ch2o-3">
+                <label class="form-check-label" for="ch2o-3">
+                    More than two liters
+                </label>
+            </div>
+
+            <h3 class="h5">Do you monitor the calories you eat daily?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="scc" id="scc-yes">
+                <label class="form-check-label" for="scc-yes">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="scc" id="scc-no">
+                <label class="form-check-label" for="scc-no">
+                    No
+                </label>
+            </div>
+
+            <h3 class="h5">How many days a week do you have physical activity?</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="faf" id="faf-1">
+                <label class="form-check-label" for="faf-1">
+                    4 or 5 days
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="faf" id="faf-2">
+                <label class="form-check-label" for="faf-2">
+                    2 or 4 days
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="faf" id="faf-3">
+                <label class="form-check-label" for="faf-3">
+                    1 or 2 days
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="faf" id="faf-4">
+                <label class="form-check-label" for="faf-4">
+                    I do not have
+                </label>
+            </div>
+
+            <p><input type="submit" name="submit"/></p>
+        </form>
     </div>
 </main>
-
 {% endblock %}
