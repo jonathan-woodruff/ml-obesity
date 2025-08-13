@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, RadioField
 from dotenv import load_dotenv
@@ -42,19 +42,48 @@ def fit_model():
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = Obesity(csrf_enabled=False)
-    gender = form.gender.data
-    age = form.age.data
-    height = form.height.data
-    weight = form.weight.data
-    family = form.family.data
-    favc = form.favc.data
-    fcvc = form.fcvc.data
-    ncp = form.ncp.data
-    caec = form.caec.data
-    smoke = form.smoke.data
-    ch2o = form.ch2o.data
-    scc = form.scc.data
-    faf = form.faf.data
     if form.validate_on_submit(): #if valid submission
-        print(gender)
+        return redirect(url_for(
+            "prediction", 
+            gender = form.gender.data,
+            age = form.age.data,
+            height = form.height.data,
+            weight = form.weight.data,
+            family = form.family.data,
+            favc = form.favc.data,
+            fcvc = form.fcvc.data,
+            ncp = form.ncp.data,
+            caec = form.caec.data,
+            smoke = form.smoke.data,
+            ch2o = form.ch2o.data,
+            scc = form.scc.data,
+            faf = form.faf.data,
+            tue = form.tue.data,
+            calc = form.calc.data,
+            mtrans = form.mtrans.data,
+            _external=True, 
+            _scheme='https'
+        ))
     return render_template('gender.html', template_form=form)
+
+@app.route('/prediction', methods=["GET"])
+def prediction(gender, age, height, weight, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans):
+    return render_template(
+        'prediction.html',
+        gender=gender,
+        age=age,
+        height=height,
+        weight=weight,
+        family=family,
+        favc=favc,
+        fcvc=fcvc,
+        ncp=ncp,
+        caec=caec,
+        smoke=smoke,
+        ch2o=ch2o,
+        scc=scc,
+        faf=faf,
+        tue=tue,
+        calc=calc,
+        mtrans=mtrans
+    )

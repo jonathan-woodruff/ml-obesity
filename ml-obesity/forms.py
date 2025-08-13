@@ -17,6 +17,9 @@ ncpOptions = [("one","Between one and two meals"), ("two","Three meals"), ("thre
 afsn = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "No")]
 ch2oOptions = [("one","Less than a liter"), ("two","Between one and two liters"), ("three","More than two liters")]
 fafOptions = [("one","4 or 5 days"), ("two","2 or 4 days"), ("three","1 or 2 days"), ("four","I do not have")]
+tueOptions = [("one", "0 - 1 hours"), ("two", "2 - 5 hours"), ("three", "more than 5 hours")]
+calcOptions = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "I do not drink")]
+mtransOptions = [("automobile", "Automobile"), ("motorbike", "Motorbike"), ("bike", "Bike"), ("public", "Public Transportation"), ("walking", "Walking")]
 
 class Obesity(FieldsRequiredForm):
   gender = RadioField("Gender", choices=genderOptions)
@@ -32,4 +35,7 @@ class Obesity(FieldsRequiredForm):
   ch2o = RadioField("CH2O", choices=ch2oOptions)
   scc = RadioField("SCC", choices=yesno)
   faf = RadioField("FAF", choices=fafOptions)
+  tue = RadioField("TUE", choices=tueOptions)
+  calc = RadioField("CALC", choices=calcOptions)
+  mtrans = RadioField("MTRANS", choices=mtransOptions)
   submit = SubmitField("Submit")
