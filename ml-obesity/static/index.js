@@ -1,5 +1,4 @@
-import * as bootstrap from 'bootstrap'; //js
-
+/*
 const submitButton = document.getElementById('submit');
 
 const submitContent = (event) => {
@@ -7,4 +6,4 @@ const submitContent = (event) => {
   alert('hi');
 }
 
-submitButton.addEventListener('click', submitContent);
+submitButton.addEventListener('click', submitContent);*/

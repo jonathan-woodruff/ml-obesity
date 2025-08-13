@@ -42,10 +42,24 @@ def fit_model():
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = Obesity(csrf_enabled=False)
+    print('difodi')
+    print(form.validate_on_submit())
     if form.validate_on_submit(): #if valid submission
+        print('iii')
         return redirect(url_for(
             "prediction", 
-            gender = form.gender.data,
+            gender = form.gender.data
+        ))
+    else:
+        print(form.errors)
+    genderOptions = {"male": "Male", "female": "Female"}
+    return render_template('gender.html', genderOptions=genderOptions, template_form=form)
+    """
+    ,
+            _external=True, 
+            _scheme='https'
+            """
+"""
             age = form.age.data,
             height = form.height.data,
             weight = form.weight.data,
@@ -61,16 +75,15 @@ def index():
             tue = form.tue.data,
             calc = form.calc.data,
             mtrans = form.mtrans.data,
-            _external=True, 
-            _scheme='https'
-        ))
-    return render_template('gender.html', template_form=form)
-
-@app.route('/prediction', methods=["GET"])
-def prediction(gender, age, height, weight, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans):
+            """
+@app.route('/prediction', methods=["GET", "POST"])
+def prediction(gender):
+    #age, height, weight, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans
     return render_template(
         'prediction.html',
-        gender=gender,
+        gender=gender
+    )
+    """,
         age=age,
         height=height,
         weight=weight,
@@ -86,4 +99,4 @@ def prediction(gender, age, height, weight, family, favc, fcvc, ncp, caec, smoke
         tue=tue,
         calc=calc,
         mtrans=mtrans
-    )
+        """

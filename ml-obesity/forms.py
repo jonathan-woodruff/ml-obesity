@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, RadioField, IntegerField, DecimalField
-
+from wtforms.validators import InputRequired, DataRequired
 
 class FieldsRequiredForm(FlaskForm):
   """Require radio fields to have content. This works around the bug that WTForms radio fields don't honor the `DataRequired` or `InputRequired` validators."""
@@ -10,7 +10,7 @@ class FieldsRequiredForm(FlaskForm):
         render_kw.setdefault("required", True)
       return super().render_field(field, render_kw)
 
-genderOptions = [("female","Female"), ("male", "Male")]
+genderOptions = [("female", "Female"), ("male", "Male")]
 yesno = [("yes","Yes"), ("no","No")]
 asn = [("always","Always"), ("sometimes","Sometimes"), ("never", "Never")]
 ncpOptions = [("one","Between one and two meals"), ("two","Three meals"), ("three","More than three meals")]
@@ -21,9 +21,11 @@ tueOptions = [("one", "0 - 1 hours"), ("two", "2 - 5 hours"), ("three", "more th
 calcOptions = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "I do not drink")]
 mtransOptions = [("automobile", "Automobile"), ("motorbike", "Motorbike"), ("bike", "Bike"), ("public", "Public Transportation"), ("walking", "Walking")]
 
-class Obesity(FieldsRequiredForm):
-  gender = RadioField("Gender", choices=genderOptions)
-  age = IntegerField("Age")
+class Obesity(FlaskForm):
+  #gender = RadioField("Gender", choices=genderOptions)
+  
+  age = IntegerField("age", validators=[DataRequired()])
+  """
   height = DecimalField("Height")
   weight = DecimalField("Weight")
   family = RadioField("Family", choices=yesno)
@@ -39,3 +41,4 @@ class Obesity(FieldsRequiredForm):
   calc = RadioField("CALC", choices=calcOptions)
   mtrans = RadioField("MTRANS", choices=mtransOptions)
   submit = SubmitField("Submit")
+  """

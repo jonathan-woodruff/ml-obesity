@@ -6,25 +6,23 @@
             {{ template_form.hidden_tag() }}
             <h2 class="text-center mb-3">Enter your information</h2>
 
+            <!--
             <h3 class="h5">Gender:</h3>
+            {% for gender, label in genderOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="female">
-                <label class="form-check-label" for="female">
-                    Female
+                <input class="form-check-input" type="radio" name="gender" id="{{ gender }}">
+                <label class="form-check-label" for="{{ gender }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="male">
-                <label class="form-check-label" for="male">
-                    Male
-                </label>
-            </div>
+            {% endfor %}
+            -->
 
             <div class="mb-3">
-                <label for="age" class="form-label">Age</label>
-                <input type="number" class="form-control" id="age" aria-describedby="ageHelp">
+                <label for="age" class="form-label">age</label>
+                <input type="number" class="form-control" name="age" id="age" aria-describedby="ageHelp">
             </div>
-
+<!--
             <div class="mb-3">
                 <label for="height" class="form-label">Height</label>
                 <input type="number" class="form-control" id="height" aria-describedby="heightHelp">
@@ -280,7 +278,7 @@
                     Walking
                 </label>
             </div>
-
+-->
             <p><input type="submit" name="submit" id="submit"/></p>
         </form>
     </div>
