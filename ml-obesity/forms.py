@@ -21,14 +21,13 @@ tueOptions = [("one", "0 - 1 hours"), ("two", "2 - 5 hours"), ("three", "more th
 calcOptions = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "I do not drink")]
 mtransOptions = [("automobile", "Automobile"), ("motorbike", "Motorbike"), ("bike", "Bike"), ("public", "Public Transportation"), ("walking", "Walking")]
 
-class Obesity(FlaskForm):
-  #gender = RadioField("Gender", choices=genderOptions)
-  
+class Obesity(FieldsRequiredForm):
+  gender = RadioField("Gender", choices=genderOptions)
   age = IntegerField("age", validators=[DataRequired()])
-  """
-  height = DecimalField("Height")
-  weight = DecimalField("Weight")
+  height = DecimalField("Height", validators=[DataRequired()])
+  weight = DecimalField("Weight", validators=[DataRequired()])
   family = RadioField("Family", choices=yesno)
+  """
   favc = RadioField("FAVC", choices=yesno)
   fcvc = RadioField("FCVC", choices=asn)
   ncp = RadioField("NCP", choices=ncpOptions)

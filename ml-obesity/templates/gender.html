@@ -6,47 +6,41 @@
             {{ template_form.hidden_tag() }}
             <h2 class="text-center mb-3">Enter your information</h2>
 
-            <!--
             <h3 class="h5">Gender:</h3>
             {% for gender, label in genderOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="{{ gender }}">
+                <input class="form-check-input" type="radio" name="gender" value="{{ gender }}" id="{{ gender }}">
                 <label class="form-check-label" for="{{ gender }}">
                     {{ label }}
                 </label>
             </div>
             {% endfor %}
-            -->
 
             <div class="mb-3">
                 <label for="age" class="form-label">age</label>
                 <input type="number" class="form-control" name="age" id="age" aria-describedby="ageHelp">
             </div>
-<!--
+
             <div class="mb-3">
                 <label for="height" class="form-label">Height</label>
-                <input type="number" class="form-control" id="height" aria-describedby="heightHelp">
+                <input type="number" step="any" name="height" class="form-control" id="height" aria-describedby="heightHelp">
             </div>
 
             <div class="mb-3">
                 <label for="weight" class="form-label">Weight</label>
-                <input type="number" class="form-control" id="weight" aria-describedby="weightHelp">
+                <input type="number" step="any" name="weight" class="form-control" id="weight" aria-describedby="weightHelp">
             </div>
 
             <h3 class="h5">Has a family member of yours struggled with being overweight?</h3>
+            {% for value, label in yesno.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="family" id="family-yes">
-                <label class="form-check-label" for="family-yes">
-                    Yes
+                <input class="form-check-input" type="radio" name="{{ value }}" value="{{ value }}" id="family-{{ value}}">
+                <label class="form-check-label" for="family-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="family" id="family-no">
-                <label class="form-check-label" for="family-no">
-                    No
-                </label>
-            </div>
-
+            {% endfor %}
+<!--
             <h3 class="h5">Do you eat high-caloric food frequently?</h3>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="favc" id="favc-yes">

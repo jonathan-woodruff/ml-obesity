@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, RadioField
 from dotenv import load_dotenv
@@ -42,61 +42,33 @@ def fit_model():
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = Obesity(csrf_enabled=False)
-    print('difodi')
-    print(form.validate_on_submit())
     if form.validate_on_submit(): #if valid submission
-        print('iii')
         return redirect(url_for(
             "prediction", 
-            gender = form.gender.data
+            gender=form.gender.data,
+            age=form.age.data,
+            height=form.height.data,
+            weight=form.weight.data,
+            family=form.family.data
         ))
-    else:
-        print(form.errors)
+    #else:
+        #print(form.errors)
     genderOptions = {"male": "Male", "female": "Female"}
-    return render_template('gender.html', genderOptions=genderOptions, template_form=form)
-    """
-    ,
-            _external=True, 
-            _scheme='https'
-            """
-"""
-            age = form.age.data,
-            height = form.height.data,
-            weight = form.weight.data,
-            family = form.family.data,
-            favc = form.favc.data,
-            fcvc = form.fcvc.data,
-            ncp = form.ncp.data,
-            caec = form.caec.data,
-            smoke = form.smoke.data,
-            ch2o = form.ch2o.data,
-            scc = form.scc.data,
-            faf = form.faf.data,
-            tue = form.tue.data,
-            calc = form.calc.data,
-            mtrans = form.mtrans.data,
-            """
-@app.route('/prediction', methods=["GET", "POST"])
-def prediction(gender):
-    #age, height, weight, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans
+    yesno = {"yes": "Yes", "no": "No"}
+    return render_template(
+        'gender.html', 
+        genderOptions=genderOptions, 
+        yesno=yesno,
+        template_form=form
+    )
+
+@app.route('/prediction/<gender>/<int:age>/<float:height>/<float:weight>/<family>', methods=["GET"])
+def prediction(gender, age, height, weight, family):
     return render_template(
         'prediction.html',
-        gender=gender
+        template_gender=gender,
+        template_age=age,
+        template_height=height,
+        template_weight=weight,
+        template_family=family
     )
-    """,
-        age=age,
-        height=height,
-        weight=weight,
-        family=family,
-        favc=favc,
-        fcvc=fcvc,
-        ncp=ncp,
-        caec=caec,
-        smoke=smoke,
-        ch2o=ch2o,
-        scc=scc,
-        faf=faf,
-        tue=tue,
-        calc=calc,
-        mtrans=mtrans
-        """
