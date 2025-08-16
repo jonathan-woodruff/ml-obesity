@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, RadioField, IntegerField, DecimalField
-from wtforms.validators import InputRequired, DataRequired
+from wtforms import SubmitField, RadioField, IntegerField, DecimalField, SelectField
+from wtforms.validators import InputRequired, DataRequired, NumberRange
 
 class FieldsRequiredForm(FlaskForm):
   """Require radio fields to have content. This works around the bug that WTForms radio fields don't honor the `DataRequired` or `InputRequired` validators."""
@@ -10,7 +10,7 @@ class FieldsRequiredForm(FlaskForm):
         render_kw.setdefault("required", True)
       return super().render_field(field, render_kw)
 
-genderOptions = [("female", "Female"), ("male", "Male")]
+genderOptions = [("Female", "Female"), ("Male", "Male")]
 yesno = [("yes", "Yes"), ("no", "No")]
 fcvcOptions = [("always","Always"), ("sometimes","Sometimes"), ("never", "Never")]
 ncpOptions = [("one", "Between one and two meals"), ("two", "Three meals"), ("three", "More than three meals")]
@@ -23,9 +23,11 @@ mtransOptions = [("automobile", "Automobile"), ("motorbike", "Motorbike"), ("bik
 
 class Obesity(FieldsRequiredForm):
   gender = RadioField("Gender", choices=genderOptions)
-  age = IntegerField("age", validators=[DataRequired()])
-  height = DecimalField("Height", validators=[DataRequired()])
-  weight = DecimalField("Weight", validators=[DataRequired()])
+  age = IntegerField("age", validators=[DataRequired(), NumberRange(min=14, message='You must be at least 14 years old')])
+  height = DecimalField("Height", validators=[DataRequired(), NumberRange(min=1, message='You must enter a positive number')])
+  heightUnit = SelectField(choices=[('cm', 'cm'), ('in', 'in')])
+  weight = DecimalField("Weight", validators=[DataRequired(), NumberRange(min=1, message='You must enter a positive number')])
+  weightUnit = SelectField(choices=[('kg', 'kg'), ('lbs', 'lbs')])
   family = RadioField("Family", choices=yesno)
   favc = RadioField("FAVC", choices=yesno)
   fcvc = RadioField("FCVC", choices=fcvcOptions)

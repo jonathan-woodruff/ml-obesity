@@ -23,12 +23,24 @@
 
             <div class="mb-3">
                 <label for="height" class="form-label">Height</label>
-                <input type="number" step="any" name="height" class="form-control" id="height" aria-describedby="heightHelp">
+                <div class="input-group">
+                    <input type="number" step="any" name="height" class="form-control" id="height" aria-describedby="heightHelp">
+                    <select class="form-select" name="heightUnit" aria-label="select height unit">
+                        <option selected>cm</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label for="weight" class="form-label">Weight</label>
-                <input type="number" step="any" name="weight" class="form-control" id="weight" aria-describedby="weightHelp">
+                <div class="input-group">
+                    <input type="number" step="any" name="weight" class="form-control" id="weight" aria-describedby="weightHelp">
+                    <select class="form-select" name="weightUnit" aria-label="select weight unit">
+                        <option selected>kg</option>
+                        <option value="lbs">lbs</option>
+                    </select>
+                </div>
             </div>
 
             <h3 class="h5">Has a family member of yours struggled with being overweight?</h3>

@@ -39,6 +39,18 @@ def fit_model():
     classifier.fit(X_train, y_train)
     return classifier
 
+def height_to_meters(height, unit):
+    if unit == 'cm':
+        return height / 100
+    elif unit == 'in':
+        return height / 39.3701
+
+def weight_to_kg(weight, unit):
+    if unit == 'kg':
+        return weight
+    elif unit == 'lbs':
+        return weight / 2.20462
+
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = Obesity(csrf_enabled=False)
@@ -48,7 +60,9 @@ def index():
             gender=form.gender.data,
             age=form.age.data,
             height=form.height.data,
+            heightUnit=form.heightUnit.data,
             weight=form.weight.data,
+            weightUnit=form.weightUnit.data,
             family=form.family.data,
             favc=form.favc.data,
             fcvc=form.fcvc.data,
@@ -67,7 +81,7 @@ def index():
     yesno = {"yes": "Yes", "no": "No"}
     return render_template(
         'gender.html',
-        genderOptions={"male": "Male", "female": "Female"}, 
+        genderOptions={"Female": "Female", "Male": "Male"}, 
         yesno=yesno,
         fcvcOptions={"always": "Always", "sometimes": "Sometimes", "never": "Never"},
         ncpOptions={"one": "Between one and two meals", "two": "Three meals", "three": "More than three meals"},
@@ -80,14 +94,37 @@ def index():
         template_form=form
     )
 
-@app.route('/prediction/<gender>/<int:age>/<float:height>/<float:weight>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>/<tue>/<calc>/<mtrans>', methods=["GET"])
-def prediction(gender, age, height, weight, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans):
+@app.route('/prediction/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>/<tue>/<calc>/<mtrans>', methods=["GET"])
+def prediction(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans):
+    """
+    classifier = fit_model()
+    prediction = classifier.predict([[
+        gender,
+        age,
+        height_to_meters(height,heightUnit),
+        weight_to_kg(weight,weightUnit),
+        family,
+        favc,
+        fcvc,
+        ncp,
+        caec,
+        smoke,
+        ch2o,
+        scc,
+        faf,
+        tue,
+        calc,
+        mtrans
+    ]])
+    """
     return render_template(
         'prediction.html',
         template_gender=gender,
         template_age=age,
         template_height=height,
+        template_heightUnit=heightUnit,
         template_weight=weight,
+        template_weightUnit=weightUnit,
         template_family=family,
         template_favc=favc,
         template_fcvc=fcvc,
