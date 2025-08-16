@@ -34,246 +34,125 @@
             <h3 class="h5">Has a family member of yours struggled with being overweight?</h3>
             {% for value, label in yesno.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="{{ value }}" value="{{ value }}" id="family-{{ value}}">
+                <input class="form-check-input" type="radio" name="family" value="{{ value }}" id="family-{{ value }}">
                 <label class="form-check-label" for="family-{{ value }}">
                     {{ label }}
                 </label>
             </div>
             {% endfor %}
-<!--
+
             <h3 class="h5">Do you eat high-caloric food frequently?</h3>
+            {% for value, label in yesno.items()  %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="favc" id="favc-yes">
-                <label class="form-check-label" for="favc-yes">
-                    Yes
+                <input class="form-check-input" type="radio" name="favc" value="{{ value }}" id="favc-{{ value }}">
+                <label class="form-check-label" for="favc-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="favc" id="favc-no">
-                <label class="form-check-label" for="favc-no">
-                    No
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">Do you usually eat vegetables with your meals?</h3>
+            {% for value, label in fcvcOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="fcvc" id="fcvc-always">
-                <label class="form-check-label" for="fcvc-always">
-                    Always
+                <input class="form-check-input" type="radio" name="fcvc" value="{{ value }}" id="fcvc-{{ value }}">
+                <label class="form-check-label" for="fcvc-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="fcvc" id="fcvc-sometimes">
-                <label class="form-check-label" for="fcvc-sometimes">
-                    Sometimes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="fcvc" id="fcvc-never">
-                <label class="form-check-label" for="fcvc-never">
-                    Never
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">How many meals do you have daily?</h3>
+            {% for value, label in ncpOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="ncp" id="ncp-1">
-                <label class="form-check-label" for="ncp-1">
-                    Between one and two meals
+                <input class="form-check-input" type="radio" name="ncp" value="{{ value }}" id="ncp-{{ value }}">
+                <label class="form-check-label" for="ncp-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="ncp" id="ncp-2">
-                <label class="form-check-label" for="ncp-2">
-                    Three meals
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="ncp" id="ncp-3">
-                <label class="form-check-label" for="ncp-3">
-                    More than three meals
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">Do you eat any food between meals?</h3>
+            {% for value, label in caecOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="caec" id="caec-always">
-                <label class="form-check-label" for="caec-always">
-                    Always
+                <input class="form-check-input" type="radio" name="caec" value="{{ value }}" id="caec-{{ value }}">
+                <label class="form-check-label" for="caec-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="caec" id="caec-frequently">
-                <label class="form-check-label" for="caec-frequently">
-                    Frequently
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="caec" id="caec-sometimes">
-                <label class="form-check-label" for="caec-sometimes">
-                    Sometimes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="caec" id="caec-never">
-                <label class="form-check-label" for="caec-never">
-                    Never
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">Do you smoke?</h3>
+            {% for value, label in yesno.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="smoke" id="smoke-yes">
-                <label class="form-check-label" for="smoke-yes">
-                    Yes
+                <input class="form-check-input" type="radio" name="smoke", value="{{ value }}" id="smoke-{{ value }}">
+                <label class="form-check-label" for="smoke-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="smoke" id="smoke-no">
-                <label class="form-check-label" for="smoke-no">
-                    No
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">How much water do you drink daily?</h3>
+            {% for value, label in ch2oOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="ch2o" id="ch2o-1">
-                <label class="form-check-label" for="ch2o-1">
-                    Less than a liter
+                <input class="form-check-input" type="radio" name="ch2o", value="{{ value }}" id="ch2o-{{ value }}">
+                <label class="form-check-label" for="ch2o-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="ch2o" id="ch2o-2">
-                <label class="form-check-label" for="ch2o-2">
-                    Between one and two liters
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="ch2o" id="ch2o-3">
-                <label class="form-check-label" for="ch2o-3">
-                    More than two liters
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">Do you monitor the calories you eat daily?</h3>
+            {% for value, label in yesno.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="scc" id="scc-yes">
-                <label class="form-check-label" for="scc-yes">
-                    Yes
+                <input class="form-check-input" type="radio" name="scc" value="{{ value }}" id="scc-{{ value }}">
+                <label class="form-check-label" for="scc-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="scc" id="scc-no">
-                <label class="form-check-label" for="scc-no">
-                    No
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">How many days a week do you have physical activity?</h3>
+            {% for value, label in fafOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="faf" id="faf-1">
-                <label class="form-check-label" for="faf-1">
-                    4 or 5 days
+                <input class="form-check-input" type="radio" name="faf" value="{{ value }}" id="faf-{{ value }}">
+                <label class="form-check-label" for="faf-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="faf" id="faf-2">
-                <label class="form-check-label" for="faf-2">
-                    2 or 4 days
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="faf" id="faf-3">
-                <label class="form-check-label" for="faf-3">
-                    1 or 2 days
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="faf" id="faf-4">
-                <label class="form-check-label" for="faf-4">
-                    I do not have
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">How much time per day do you use technological devices such as your cell phone, videogames, television, computers, and others?</h3>
+            {% for value, label in tueOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="tue" id="tue-1">
-                <label class="form-check-label" for="tue-1">
-                    0 - 2 hours
+                <input class="form-check-input" type="radio" name="tue" value="{{ value }}" id="tue-{{ value }}">
+                <label class="form-check-label" for="tue-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="tue" id="tue-2">
-                <label class="form-check-label" for="tue-2">
-                    3 - 5 hours
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="tue" id="tue-3">
-                <label class="form-check-label" for="tue-3">
-                    More than 5 hours
-                </label>
-            </div>
+            {% endfor %}
 
             <h3 class="h5">How often do you drink alcohol?</h3>
+            {% for value, label in calcOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="calc" id="calc-always">
-                <label class="form-check-label" for="calc-always">
-                    Always
+                <input class="form-check-input" type="radio" name="calc" value="{{ value }}" id="calc-{{ value }}">
+                <label class="form-check-label" for="calc-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="calc" id="calc-frequently">
-                <label class="form-check-label" for="calc-frequently">
-                    Frequently
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="calc" id="calc-sometimes">
-                <label class="form-check-label" for="calc-sometimes">
-                    Sometimes
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="caec" id="caec-never">
-                <label class="form-check-label" for="caec-never">
-                    I do not drink
-                </label>
-            </div>
+            {% endfor %}
+
 
             <h3 class="h5">Which transportation do you usually use?</h3>
+            {% for value, label in mtransOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="mtrans" id="mtrans-automobile">
-                <label class="form-check-label" for="mtrans-automobile">
-                    Automobile
+                <input class="form-check-input" type="radio" name="mtrans" value="{{ value }}" id="mtrans-{{ value }}">
+                <label class="form-check-label" for="mtrans-{{ value }}">
+                    {{ label }}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="mtrans" id="mtrans-motorbike">
-                <label class="form-check-label" for="mtrans-motorbike">
-                    Motorbike
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="mtrans" id="mtrans-bike">
-                <label class="form-check-label" for="mtrans-bike">
-                    Bike
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="mtrans" id="mtrans-public">
-                <label class="form-check-label" for="mtrans-public">
-                    Public Transportation
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="mtrans" id="mtrans-walking">
-                <label class="form-check-label" for="mtrans-walking">
-                    Walking
-                </label>
-            </div>
--->
-            <p><input type="submit" name="submit" id="submit"/></p>
+            {% endfor %}
+
+            {{ template_form.submit }}
         </form>
     </div>
 </main>

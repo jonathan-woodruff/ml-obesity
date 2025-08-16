@@ -11,14 +11,14 @@ class FieldsRequiredForm(FlaskForm):
       return super().render_field(field, render_kw)
 
 genderOptions = [("female", "Female"), ("male", "Male")]
-yesno = [("yes","Yes"), ("no","No")]
-asn = [("always","Always"), ("sometimes","Sometimes"), ("never", "Never")]
-ncpOptions = [("one","Between one and two meals"), ("two","Three meals"), ("three","More than three meals")]
-afsn = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "No")]
-ch2oOptions = [("one","Less than a liter"), ("two","Between one and two liters"), ("three","More than two liters")]
-fafOptions = [("one","4 or 5 days"), ("two","2 or 4 days"), ("three","1 or 2 days"), ("four","I do not have")]
+yesno = [("yes", "Yes"), ("no", "No")]
+fcvcOptions = [("always","Always"), ("sometimes","Sometimes"), ("never", "Never")]
+ncpOptions = [("one", "Between one and two meals"), ("two", "Three meals"), ("three", "More than three meals")]
+caecOptions = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "No")]
+ch2oOptions = [("one", "Less than a liter"), ("two", "Between one and two liters"), ("three", "More than two liters")]
+fafOptions = [("one", "4 or 5 days"), ("two", "2 or 4 days"), ("three", "1 or 2 days"), ("four", "I do not have")]
 tueOptions = [("one", "0 - 1 hours"), ("two", "2 - 5 hours"), ("three", "more than 5 hours")]
-calcOptions = [("always","Always"), ("frequently","Frequently"), ("sometimes","Sometimes"), ("no", "I do not drink")]
+calcOptions = [("always", "Always"), ("frequently", "Frequently"), ("sometimes", "Sometimes"), ("no", "I do not drink")]
 mtransOptions = [("automobile", "Automobile"), ("motorbike", "Motorbike"), ("bike", "Bike"), ("public", "Public Transportation"), ("walking", "Walking")]
 
 class Obesity(FieldsRequiredForm):
@@ -27,11 +27,10 @@ class Obesity(FieldsRequiredForm):
   height = DecimalField("Height", validators=[DataRequired()])
   weight = DecimalField("Weight", validators=[DataRequired()])
   family = RadioField("Family", choices=yesno)
-  """
   favc = RadioField("FAVC", choices=yesno)
-  fcvc = RadioField("FCVC", choices=asn)
+  fcvc = RadioField("FCVC", choices=fcvcOptions)
   ncp = RadioField("NCP", choices=ncpOptions)
-  caec = RadioField("CAEC", choices=afsn)
+  caec = RadioField("CAEC", choices=caecOptions)
   smoke = RadioField("SMOKE", choices=yesno)
   ch2o = RadioField("CH2O", choices=ch2oOptions)
   scc = RadioField("SCC", choices=yesno)
@@ -40,4 +39,3 @@ class Obesity(FieldsRequiredForm):
   calc = RadioField("CALC", choices=calcOptions)
   mtrans = RadioField("MTRANS", choices=mtransOptions)
   submit = SubmitField("Submit")
-  """
