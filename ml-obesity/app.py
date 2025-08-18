@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from forms import Obesity
+from forms import GenderForm, AgeForm, HeightForm
 import os
 import pandas as pd
 
@@ -44,16 +44,88 @@ def height_to_meters(height, unit):
         return height / 100
     elif unit == 'in':
         return height / 39.3701
+    else:
+        raise Exception('Unexpected unit argument')
 
 def weight_to_kg(weight, unit):
     if unit == 'kg':
         return weight
     elif unit == 'lbs':
         return weight / 2.20462
+    else:
+        raise Exception('Unexpected unit argument')
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    form = Obesity(csrf_enabled=False)
+    form = GenderForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "age", 
+            gender=form.gender.data,
+        ))
+
+    return render_template(
+        'gender.html',
+        genderOptions={0: "Female", 1: "Male"},
+        template_form=form
+    )
+
+@app.route('/age/<int:gender>', methods=["GET", "POST"])
+def age(gender):
+    form = AgeForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "height", 
+            gender=gender,
+            age=form.age.data
+        ))
+    #else:
+        #print(form.errors)
+
+    return render_template(
+        'age.html',
+        template_form=form
+    )
+
+@app.route('/height/<int:gender>/<int:age>', methods=["GET", "POST"])
+def height(gender, age):
+    form = HeightForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "weight", 
+            gender=gender,
+            age=age,
+            height=form.height.data,
+            heightUnit=form.heightUnit.data,
+        ))
+
+    return render_template(
+        'height.html',
+        template_form=form
+    )
+
+@app.route('/weight/<int:gender>/<int:age>/<float:height>/<heightUnit>', methods=["GET", "POST"])
+def weight(gender, age, height, heightUnit):
+    form = HeightForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "family", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=form.weight.data,
+            weightUnit=form.weightUnit.data,
+        ))
+
+    return render_template(
+        'weight.html',
+        template_form=form
+    )
+
+@app.route('/family/<int:gender>/<int:age>/<float:height>/<heightUnit>', methods=["GET", "POST"])
+def family(gender, age, height, heightUnit):
+    form = HeightForm(csrf_enabled=False)
     if form.validate_on_submit(): #if valid submission
         return redirect(url_for(
             "prediction", 
@@ -76,27 +148,25 @@ def index():
             calc=form.calc.data,
             mtrans=form.mtrans.data
         ))
-    #else:
-        #print(form.errors)
-    yesno = {"yes": "Yes", "no": "No"}
+
+    yesno = {1: "Yes", 0: "No"}
     return render_template(
         'gender.html',
-        genderOptions={"Female": "Female", "Male": "Male"}, 
+        genderOptions={0: "Female", 1: "Male"}, 
         yesno=yesno,
-        fcvcOptions={"always": "Always", "sometimes": "Sometimes", "never": "Never"},
-        ncpOptions={"one": "Between one and two meals", "two": "Three meals", "three": "More than three meals"},
-        caecOptions={"always": "Always", "frequently": "Frequently", "sometimes": "Sometimes", "no": "No"},
-        ch2oOptions={"one": "Less than a liter", "two": "Between one and two liters", "three": "More than two liters"},
-        fafOptions={"one": "4 or 5 days", "two": "2 or 4 days", "three": "1 or 2 days", "four": "I do not have"},
-        tueOptions={"one": "0 - 1 hours", "two": "2 - 5 hours", "three": "more than 5 hours"},
-        calcOptions={"always": "Always", "frequently": "Frequently", "sometimes": "Sometimes", "no": "I do not drink"},
-        mtransOptions={"automobile": "Automobile", "motorbike": "Motorbike", "bike": "Bike", "public": "Public Transportation", "walking": "Walking"},
+        fcvcOptions={3: "Always", 2: "Sometimes", 1: "Never"},
+        ncpOptions={1: "Between one and two meals", 3: "Three meals", 4: "More than three meals"},
+        caecOptions={3: "Always", 2: "Frequently", 1: "Sometimes", 0: "No"},
+        ch2oOptions={1: "Less than a liter", 2: "Between one and two liters", 3: "More than two liters"},
+        fafOptions={3: "4 or 5 days", 2: "2 or 4 days", 1: "1 or 2 days", 0: "I do not have"},
+        tueOptions={0: "0 - 1 hours", 1: "2 - 5 hours", 2: "more than 5 hours"},
+        calcOptions={3: "Always", 2: "Frequently", 1: "Sometimes", 0: "I do not drink"},
+        mtransOptions={0: "Automobile", 2: "Motorbike", 1: "Bike", 3: "Public Transportation", 4: "Walking"},
         template_form=form
     )
 
 @app.route('/prediction/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>/<tue>/<calc>/<mtrans>', methods=["GET"])
 def prediction(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans):
-    """
     classifier = fit_model()
     prediction = classifier.predict([[
         gender,
@@ -116,25 +186,8 @@ def prediction(gender, age, height, heightUnit, weight, weightUnit, family, favc
         calc,
         mtrans
     ]])
-    """
+    
     return render_template(
         'prediction.html',
-        template_gender=gender,
-        template_age=age,
-        template_height=height,
-        template_heightUnit=heightUnit,
-        template_weight=weight,
-        template_weightUnit=weightUnit,
-        template_family=family,
-        template_favc=favc,
-        template_fcvc=fcvc,
-        template_ncp=ncp,
-        template_caec=caec,
-        template_smoke=smoke,
-        template_ch2o=ch2o,
-        template_scc=scc,
-        template_faf=faf,
-        template_tue=tue,
-        template_calc=calc,
-        template_mtrans=mtrans
+        template_prediction=prediction
     )

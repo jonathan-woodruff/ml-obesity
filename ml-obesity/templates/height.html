@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="main-container" class="container py-2 px-3 mx-auto">
+    <div class="row">
+        <form method="POST" class="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+            {{ template_form.hidden_tag() }}
+            <h2 class="text-center mb-3">Enter your information</h2>
+
+            <div class="mb-3">
+                <label for="height" class="form-label">Height</label>
+                <div class="input-group">
+                    <input type="number" step="any" name="height" class="form-control" id="height" aria-describedby="heightHelp">
+                    <select class="form-select" name="heightUnit" aria-label="select height unit">
+                        <option selected>cm</option>
+                        <option value="in">in</option>
+                    </select>
+                </div>
+            </div>
+
+            {{ template_form.submit }}
+        </form>
+    </div>
+</main>
+{% endblock %}
