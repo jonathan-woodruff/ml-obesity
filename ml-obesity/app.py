@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from forms import GenderForm, AgeForm, HeightForm
+from forms import GenderForm, AgeForm, HeightForm, WeightForm, FamilyForm
 import os
 import pandas as pd
 
@@ -13,6 +13,8 @@ load_dotenv()  #load environment variables from .env
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+
+yesno = {1: "Yes", 0: "No"}
 
 def fit_model():
     df = pd.read_csv('obesity-data.csv')
@@ -106,7 +108,7 @@ def height(gender, age):
 
 @app.route('/weight/<int:gender>/<int:age>/<float:height>/<heightUnit>', methods=["GET", "POST"])
 def weight(gender, age, height, heightUnit):
-    form = HeightForm(csrf_enabled=False)
+    form = WeightForm(csrf_enabled=False)
     if form.validate_on_submit(): #if valid submission
         return redirect(url_for(
             "family", 
@@ -123,8 +125,29 @@ def weight(gender, age, height, heightUnit):
         template_form=form
     )
 
-@app.route('/family/<int:gender>/<int:age>/<float:height>/<heightUnit>', methods=["GET", "POST"])
-def family(gender, age, height, heightUnit):
+@app.route('/family/<int:gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>', methods=["GET", "POST"])
+def family(gender, age, height, heightUnit, weight, weightUnit):
+    form = FamilyForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "favc", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=form.family.data,
+        ))
+
+    return render_template(
+        'family.html',
+        yesno=yesno,
+        template_form=form
+    )
+
+@app.route('/favc/<int:gender>/<int:age>/<float:height>/<heightUnit>', methods=["GET", "POST"])
+def favc(gender, age, height, heightUnit, weight, weightUnit):
     form = HeightForm(csrf_enabled=False)
     if form.validate_on_submit(): #if valid submission
         return redirect(url_for(

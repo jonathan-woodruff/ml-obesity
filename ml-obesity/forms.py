@@ -38,9 +38,12 @@ class WeightForm(FlaskForm):
   weight = DecimalField("Weight", validators=[DataRequired(), NumberRange(min=1, message='You must enter a positive number')])
   weightUnit = SelectField(choices=[('kg', 'kg'), ('lbs', 'lbs')])
   submit = SubmitField("Submit")
+
+class FamilyForm(FieldsRequiredForm):
+  family = RadioField("Family", choices=yesno)
+  submit = SubmitField("Submit")
   
   """
-  family = RadioField("Family", choices=yesno)
   favc = RadioField("FAVC", choices=yesno)
   fcvc = RadioField("FCVC", choices=fcvcOptions)
   ncp = RadioField("NCP", choices=ncpOptions)
