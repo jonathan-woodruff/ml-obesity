@@ -30,12 +30,12 @@ class AgeForm(FlaskForm):
   submit = SubmitField("Submit")
 
 class HeightForm(FlaskForm):
-  height = DecimalField("Height", validators=[DataRequired(), NumberRange(min=1, message='You must enter a positive number')])
+  height = DecimalField("Height", validators=[DataRequired(), NumberRange(min=.01, message='You must enter a positive number')])
   heightUnit = SelectField(choices=[('cm', 'cm'), ('in', 'in')])
   submit = SubmitField("Submit")
 
 class WeightForm(FlaskForm):
-  weight = DecimalField("Weight", validators=[DataRequired(), NumberRange(min=1, message='You must enter a positive number')])
+  weight = DecimalField("Weight", validators=[DataRequired(), NumberRange(min=.01, message='You must enter a positive number')])
   weightUnit = SelectField(choices=[('kg', 'kg'), ('lbs', 'lbs')])
   submit = SubmitField("Submit")
 

@@ -15,7 +15,9 @@
                     </select>
                 </div>
             </div>
-
+            <div class="text-danger text-center">
+                {{ template_form.errors['weight'] | first }}
+            </div>
             {{ template_form.submit }}
         </form>
     </div>

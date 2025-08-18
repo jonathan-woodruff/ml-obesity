@@ -16,7 +16,9 @@
                     </select>
                 </div>
             </div>
-
+            <div class="text-danger text-center">
+                {{ template_form.errors['height'] | first }}
+            </div>
             {{ template_form.submit }}
         </form>
     </div>

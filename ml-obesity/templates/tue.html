@@ -15,7 +15,9 @@
                 </label>
             </div>
             {% endfor %}
-
+            <div class="text-danger text-center">
+                {{ template_form.errors['tue'] | first }}
+            </div>
             {{ template_form.submit }}
         </form>
     </div>
