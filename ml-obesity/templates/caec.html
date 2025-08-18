@@ -6,12 +6,11 @@
             {{ template_form.hidden_tag() }}
             <h2 class="text-center mb-3">Enter your information</h2>
 
-
-            <h3 class="h5">Do you eat high-caloric food frequently?</h3>
-            {% for value, label in yesno.items()  %}
+            <h3 class="h5">Do you eat any food between meals?</h3>
+            {% for value, label in caecOptions.items() %}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="favc" value="{{ value }}" id="favc-{{ value }}">
-                <label class="form-check-label" for="favc-{{ value }}">
+                <input class="form-check-input" type="radio" name="caec" value="{{ value }}" id="caec-{{ value }}">
+                <label class="form-check-label" for="caec-{{ value }}">
                     {{ label }}
                 </label>
             </div>

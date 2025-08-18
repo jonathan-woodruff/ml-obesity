@@ -42,18 +42,47 @@ class WeightForm(FlaskForm):
 class FamilyForm(FieldsRequiredForm):
   family = RadioField("Family", choices=yesno)
   submit = SubmitField("Submit")
-  
-  """
+
+class FAVCForm(FieldsRequiredForm):
   favc = RadioField("FAVC", choices=yesno)
+  submit = SubmitField("Submit")
+
+class FCVCForm(FieldsRequiredForm):
   fcvc = RadioField("FCVC", choices=fcvcOptions)
+  submit = SubmitField("Submit")
+
+class NCPForm(FieldsRequiredForm):
   ncp = RadioField("NCP", choices=ncpOptions)
+  submit = SubmitField("Submit")
+
+class CAECForm(FieldsRequiredForm):
   caec = RadioField("CAEC", choices=caecOptions)
+  submit = SubmitField("Submit")
+
+class SmokeForm(FieldsRequiredForm):
   smoke = RadioField("SMOKE", choices=yesno)
+  submit = SubmitField("Submit")
+
+class CH2OForm(FieldsRequiredForm):
   ch2o = RadioField("CH2O", choices=ch2oOptions)
+  submit = SubmitField("Submit")
+
+class SCCForm(FieldsRequiredForm):
   scc = RadioField("SCC", choices=yesno)
+  submit = SubmitField("Submit")
+
+class FAFForm(FieldsRequiredForm):
   faf = RadioField("FAF", choices=fafOptions)
+  submit = SubmitField("Submit")
+
+class TUEForm(FieldsRequiredForm):
   tue = RadioField("TUE", choices=tueOptions)
+  submit = SubmitField("Submit")
+
+class CALCForm(FieldsRequiredForm):
   calc = RadioField("CALC", choices=calcOptions)
+  submit = SubmitField("Submit")
+
+class MTRANSForm(FieldsRequiredForm):
   mtrans = RadioField("MTRANS", choices=mtransOptions)
   submit = SubmitField("Submit")
-  """

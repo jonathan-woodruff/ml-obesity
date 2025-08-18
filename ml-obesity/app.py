@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from forms import GenderForm, AgeForm, HeightForm, WeightForm, FamilyForm
+from forms import GenderForm, AgeForm, HeightForm, WeightForm, FamilyForm, FAVCForm, FCVCForm, NCPForm, CAECForm, SmokeForm, CH2OForm, SCCForm, FAFForm, TUEForm, CALCForm, MTRANSForm
 import os
 import pandas as pd
 
@@ -63,7 +63,7 @@ def index():
     if form.validate_on_submit(): #if valid submission
         return redirect(url_for(
             "age", 
-            gender=form.gender.data,
+            gender=form.gender.data
         ))
 
     return render_template(
@@ -98,7 +98,7 @@ def height(gender, age):
             gender=gender,
             age=age,
             height=form.height.data,
-            heightUnit=form.heightUnit.data,
+            heightUnit=form.heightUnit.data
         ))
 
     return render_template(
@@ -117,7 +117,7 @@ def weight(gender, age, height, heightUnit):
             height=height,
             heightUnit=heightUnit,
             weight=form.weight.data,
-            weightUnit=form.weightUnit.data,
+            weightUnit=form.weightUnit.data
         ))
 
     return render_template(
@@ -137,7 +137,7 @@ def family(gender, age, height, heightUnit, weight, weightUnit):
             heightUnit=heightUnit,
             weight=weight,
             weightUnit=weightUnit,
-            family=form.family.data,
+            family=form.family.data
         ))
 
     return render_template(
@@ -146,44 +146,299 @@ def family(gender, age, height, heightUnit, weight, weightUnit):
         template_form=form
     )
 
-@app.route('/favc/<int:gender>/<int:age>/<float:height>/<heightUnit>', methods=["GET", "POST"])
-def favc(gender, age, height, heightUnit, weight, weightUnit):
-    form = HeightForm(csrf_enabled=False)
+@app.route('/favc/<int:gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>', methods=["GET", "POST"])
+def favc(gender, age, height, heightUnit, weight, weightUnit, family):
+    form = FAVCForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "fcvc", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=form.favc.data
+        ))
+
+    return render_template(
+        'favc.html',
+        yesno=yesno,
+        template_form=form
+    )
+
+@app.route('/fcvc/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>', methods=["GET", "POST"])
+def fcvc(gender, age, height, heightUnit, weight, weightUnit, family, favc):
+    form = FCVCForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "ncp", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=form.fcvc.data
+        ))
+
+    return render_template(
+        'fcvc.html',
+        fcvcOptions={3: "Always", 2: "Sometimes", 1: "Never"},
+        template_form=form
+    )
+
+@app.route('/ncp/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>', methods=["GET", "POST"])
+def ncp(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc):
+    form = NCPForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "caec", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=form.ncp.data
+        ))
+
+    return render_template(
+        'ncp.html',
+        ncpOptions={1: "Between one and two meals", 3: "Three meals", 4: "More than three meals"},
+        template_form=form
+    )
+
+@app.route('/caec/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>', methods=["GET", "POST"])
+def caec(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp):
+    form = CAECForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "smoke", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=form.caec.data
+        ))
+
+    return render_template(
+        'caec.html',
+        caecOptions={3: "Always", 2: "Frequently", 1: "Sometimes", 0: "No"},
+        template_form=form
+    )
+
+@app.route('/smoke/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>', methods=["GET", "POST"])
+def smoke(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec):
+    form = SmokeForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "ch2o", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=form.smoke.data
+        ))
+
+    return render_template(
+        'smoke.html',
+        yesno=yesno,
+        template_form=form
+    )
+
+@app.route('/ch2o/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>', methods=["GET", "POST"])
+def ch2o(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke):
+    form = CH2OForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "scc", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=smoke,
+            ch2o=form.ch2o.data
+        ))
+
+    return render_template(
+        'ch2o.html',
+        ch2oOptions={1: "Less than a liter", 2: "Between one and two liters", 3: "More than two liters"},
+        template_form=form
+    )
+
+@app.route('/scc/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>', methods=["GET", "POST"])
+def scc(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o):
+    form = SCCForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "faf", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=smoke,
+            ch2o=ch2o,
+            scc=form.scc.data
+        ))
+
+    return render_template(
+        'scc.html',
+        yesno=yesno,
+        template_form=form
+    )
+
+@app.route('/faf/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>', methods=["GET", "POST"])
+def faf(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc):
+    form = FAFForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "tue", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=smoke,
+            ch2o=ch2o,
+            scc=scc,
+            faf=form.faf.data
+        ))
+
+    return render_template(
+        'faf.html',
+        fafOptions={3: "4 or 5 days", 2: "2 or 4 days", 1: "1 or 2 days", 0: "I do not have"},
+        template_form=form
+    )
+
+@app.route('/tue/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>', methods=["GET", "POST"])
+def tue(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf):
+    form = TUEForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "calc", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=smoke,
+            ch2o=ch2o,
+            scc=scc,
+            faf=faf,
+            tue=form.tue.data
+        ))
+
+    return render_template(
+        'tue.html',
+        tueOptions={0: "0 - 1 hours", 1: "2 - 5 hours", 2: "more than 5 hours"},
+        template_form=form
+    )
+
+@app.route('/calc/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>/<tue>', methods=["GET", "POST"])
+def calc(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue):
+    form = CALCForm(csrf_enabled=False)
+    if form.validate_on_submit(): #if valid submission
+        return redirect(url_for(
+            "mtrans", 
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=smoke,
+            ch2o=ch2o,
+            scc=scc,
+            faf=faf,
+            tue=tue,
+            calc=form.calc.data
+        ))
+
+    return render_template(
+        'calc.html',
+        calcOptions={3: "Always", 2: "Frequently", 1: "Sometimes", 0: "I do not drink"},
+        template_form=form
+    )
+
+@app.route('/mtrans/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>/<tue>/<calc>', methods=["GET", "POST"])
+def mtrans(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc):
+    form = MTRANSForm(csrf_enabled=False)
     if form.validate_on_submit(): #if valid submission
         return redirect(url_for(
             "prediction", 
-            gender=form.gender.data,
-            age=form.age.data,
-            height=form.height.data,
-            heightUnit=form.heightUnit.data,
-            weight=form.weight.data,
-            weightUnit=form.weightUnit.data,
-            family=form.family.data,
-            favc=form.favc.data,
-            fcvc=form.fcvc.data,
-            ncp=form.ncp.data,
-            caec=form.caec.data,
-            smoke=form.smoke.data,
-            ch2o=form.ch2o.data,
-            scc=form.scc.data,
-            faf=form.faf.data,
-            tue=form.tue.data,
-            calc=form.calc.data,
+            gender=gender,
+            age=age,
+            height=height,
+            heightUnit=heightUnit,
+            weight=weight,
+            weightUnit=weightUnit,
+            family=family,
+            favc=favc,
+            fcvc=fcvc,
+            ncp=ncp,
+            caec=caec,
+            smoke=smoke,
+            ch2o=ch2o,
+            scc=scc,
+            faf=faf,
+            tue=tue,
+            calc=calc,
             mtrans=form.mtrans.data
         ))
 
-    yesno = {1: "Yes", 0: "No"}
     return render_template(
-        'gender.html',
-        genderOptions={0: "Female", 1: "Male"}, 
-        yesno=yesno,
-        fcvcOptions={3: "Always", 2: "Sometimes", 1: "Never"},
-        ncpOptions={1: "Between one and two meals", 3: "Three meals", 4: "More than three meals"},
-        caecOptions={3: "Always", 2: "Frequently", 1: "Sometimes", 0: "No"},
-        ch2oOptions={1: "Less than a liter", 2: "Between one and two liters", 3: "More than two liters"},
-        fafOptions={3: "4 or 5 days", 2: "2 or 4 days", 1: "1 or 2 days", 0: "I do not have"},
-        tueOptions={0: "0 - 1 hours", 1: "2 - 5 hours", 2: "more than 5 hours"},
-        calcOptions={3: "Always", 2: "Frequently", 1: "Sometimes", 0: "I do not drink"},
+        'mtrans.html',
         mtransOptions={0: "Automobile", 2: "Motorbike", 1: "Bike", 3: "Public Transportation", 4: "Walking"},
         template_form=form
     )
