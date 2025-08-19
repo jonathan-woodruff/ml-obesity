@@ -4,6 +4,7 @@ from wtforms import SubmitField, RadioField
 from dotenv import load_dotenv
 from forms import GenderForm, AgeForm, HeightForm, WeightForm, FamilyForm, FAVCForm, FCVCForm, NCPForm, CAECForm, SmokeForm, CH2OForm, SCCForm, FAFForm, TUEForm, CALCForm, MTRANSForm
 from utilities.index import fit_model, height_to_meters, weight_to_kg
+import numpy as np
 import os
 
 load_dotenv()  #load environment variables from .env
@@ -399,8 +400,8 @@ def mtrans(gender, age, height, heightUnit, weight, weightUnit, family, favc, fc
 
 @app.route('/prediction/<gender>/<int:age>/<float:height>/<heightUnit>/<float:weight>/<weightUnit>/<family>/<favc>/<fcvc>/<ncp>/<caec>/<smoke>/<ch2o>/<scc>/<faf>/<tue>/<calc>/<mtrans>', methods=["GET"])
 def prediction(gender, age, height, heightUnit, weight, weightUnit, family, favc, fcvc, ncp, caec, smoke, ch2o, scc, faf, tue, calc, mtrans):
-    classifier = fit_model()
-    prediction = classifier.predict([[
+    [classifier, scaler] = fit_model()
+    userData = np.array([[
         gender,
         age,
         height_to_meters(height,heightUnit),
@@ -418,6 +419,8 @@ def prediction(gender, age, height, heightUnit, weight, weightUnit, family, favc
         calc,
         mtrans
     ]])
+    scaledUserData = scaler.transform(userData)
+    prediction = classifier.predict(scaledUserData)
     
     return render_template(
         'prediction.html',

@@ -22,12 +22,11 @@ def fit_model():
     #Z-score normalize the features
     scaler = preprocessing.StandardScaler()
     X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
 
     #Fit the model
     classifier = SVC(kernel="linear")
     classifier.fit(X_train, y_train)
-    return classifier
+    return [classifier, scaler]
 
 def height_to_meters(height, unit):
     if unit == 'cm':
