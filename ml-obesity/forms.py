@@ -23,65 +23,65 @@ mtransOptions = [(0, "Automobile"), (2, "Motorbike"), (1, "Bike"), (3, "Public T
 
 class GenderForm(FieldsRequiredForm):
   gender = RadioField("Gender", choices=genderOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class AgeForm(FlaskForm):
   age = IntegerField("age", validators=[DataRequired(), NumberRange(min=14, message='You must be at least 14 years old')])
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class HeightForm(FlaskForm):
   height = DecimalField("Height", validators=[DataRequired(), NumberRange(min=.01, message='You must enter a positive number')])
   heightUnit = SelectField(choices=[('cm', 'cm'), ('in', 'in')])
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class WeightForm(FlaskForm):
   weight = DecimalField("Weight", validators=[DataRequired(), NumberRange(min=.01, message='You must enter a positive number')])
   weightUnit = SelectField(choices=[('kg', 'kg'), ('lbs', 'lbs')])
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class FamilyForm(FieldsRequiredForm):
   family = RadioField("Family", choices=yesno)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class FAVCForm(FieldsRequiredForm):
   favc = RadioField("FAVC", choices=yesno)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class FCVCForm(FieldsRequiredForm):
   fcvc = RadioField("FCVC", choices=fcvcOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class NCPForm(FieldsRequiredForm):
   ncp = RadioField("NCP", choices=ncpOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class CAECForm(FieldsRequiredForm):
   caec = RadioField("CAEC", choices=caecOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class SmokeForm(FieldsRequiredForm):
   smoke = RadioField("SMOKE", choices=yesno)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class CH2OForm(FieldsRequiredForm):
   ch2o = RadioField("CH2O", choices=ch2oOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class SCCForm(FieldsRequiredForm):
   scc = RadioField("SCC", choices=yesno)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class FAFForm(FieldsRequiredForm):
   faf = RadioField("FAF", choices=fafOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class TUEForm(FieldsRequiredForm):
   tue = RadioField("TUE", choices=tueOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class CALCForm(FieldsRequiredForm):
   calc = RadioField("CALC", choices=calcOptions)
-  submit = SubmitField("Submit")
+  submit = SubmitField("Next")
 
 class MTRANSForm(FieldsRequiredForm):
   mtrans = RadioField("MTRANS", choices=mtransOptions)

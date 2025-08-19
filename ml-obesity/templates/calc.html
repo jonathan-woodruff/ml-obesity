@@ -18,7 +18,9 @@
             <div class="text-danger text-center">
                 {{ template_form.errors['calc'] | first }}
             </div>
-            {{ template_form.submit }}
+            <div class="d-grid">
+                {{ template_form.submit(class="btn btn-primary mt-2") }}
+            </div>
         </form>
     </div>
 </main>
