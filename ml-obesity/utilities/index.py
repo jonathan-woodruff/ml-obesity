@@ -23,8 +23,6 @@ def fit_model():
     scaler = preprocessing.StandardScaler()
     X_train = scaler.fit_transform(X_train.values)
 
-    print(X_train)
-
     #Fit the model
     classifier = SVC(kernel="linear")
     classifier.fit(X_train, y_train)

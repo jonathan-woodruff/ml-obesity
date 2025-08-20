@@ -1,27 +1,68 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <h2>Your Prediction:</h2>
-    <p>{{ template_prediction }}</p>
-    <!--
-    <p>{{ template_gender }}</p>
-    <p>{{ template_age }}</p>
-    <p>{{ template_height }}</p>
-    <p>{{ template_heightUnit }}</p>
-    <p>{{ template_weight }}</p>
-    <p>{{ template_weightUnit }}</p>
-    <p>{{ template_family }}</p>
-    <p>{{ template_favc }}</p>
-    <p>{{ template_fcvc }}</p>
-    <p>{{ template_ncp }}</p>
-    <p>{{ template_caec }}</p>
-    <p>{{ template_smoke }}</p>
-    <p>{{ template_ch2o }}</p>
-    <p>{{ template_scc }}</p>
-    <p>{{ template_faf }}</p>
-    <p>{{ template_tue }}</p>
-    <p>{{ template_calc }}</p>
-    <p>{{ template_mtrans }}</p>
--->
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+                <span class="h6">Your prediction:</span>
+                {% if template_prediction == ['Insufficient_Weight'] %}
+                    <span>Insufficient weight</span>
+                {% elif template_prediction == ['Normal_Weight'] %}
+                    <span>Normal weight</span>
+                {% elif template_prediction == ['Overweight_Level_I'] %}
+                    <span>Overweight level 1</span>
+                {% elif template_prediction == ['Overweight_Level_II'] %}
+                    <span>Overweight level 2</span>
+                {% elif template_prediction == ['Obesity_Level_I'] %}
+                    <span>Obesity level 1</span>
+                {% elif template_prediction == ['Obesity_Level_II'] %}
+                    <span>Obesity level 2</span>
+                {% elif template_prediction == ['Obesity_Level_III'] %}
+                    <span>Obesity level 3</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+                <ul class="list-group">
+                    {% if template_prediction == ['Insufficient_Weight'] %}
+                        <li class="list-group-item active">Insufficient weight</li>
+                    {% else %}
+                        <li class="list-group-item">Insufficient weight</li>
+                    {% endif %}
+                    {% if template_prediction == ['Normal_Weight'] %}
+                        <li class="list-group-item active">Normal weight</li>
+                    {% else %}
+                        <li class="list-group-item">Normal weight</li>
+                    {% endif %}
+                    {% if template_prediction == ['Overweight_Level_I'] %}
+                        <li class="list-group-item active">Overweight level 1</li>
+                    {% else %}
+                        <li class="list-group-item">Overweight level 1</li>
+                    {% endif %}
+                    {% if template_prediction == ['Overweight_Level_II'] %}
+                        <li class="list-group-item active">Overweight level 2</li>
+                    {% else %}
+                        <li class="list-group-item">Overweight level 2</li>
+                    {% endif %}
+                    {% if template_prediction == ['Obesity_Level_I'] %}
+                        <li class="list-group-item active">Obesity level 1</li>
+                    {% else %}
+                        <li class="list-group-item">Obesity level 1</li>
+                    {% endif %}
+                    {% if template_prediction == ['Obesity_Level_II'] %}
+                        <li class="list-group-item active">Obesity level 2</li>
+                    {% else %}
+                        <li class="list-group-item">Obesity level 2</li>
+                    {% endif %}
+                    {% if template_prediction == ['Obesity_Level_III'] %}
+                        <li class="list-group-item active">Obesity level 3</li>
+                    {% else %}
+                        <li class="list-group-item">Obesity level 3</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </main>
 {% endblock %}
