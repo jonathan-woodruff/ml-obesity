@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<main id="main-container" class="container py-2 px-3 mx-auto">
+<main id="main-container" class="container px-3 mx-auto">
     <div class="row">
         <form method="POST" class="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
             {{ template_form.hidden_tag() }}
-            <h2 class="text-center mb-3">Enter your information</h2>
-
-            <div class="mb-3">
-                <label for="height" class="form-label">Height</label>
+            <div class="border-start border-secondary border-5 px-4 mb-3">
+                <label for="height" class="form-label h6">Your height:</label>
                 <div class="input-group">
                     <input type="number" step="any" name="height" class="form-control" id="height" aria-describedby="heightHelp">
                     <select class="form-select" name="heightUnit" aria-label="select height unit">
@@ -20,7 +18,7 @@
                 {{ template_form.errors['height'] | first }}
             </div>
             <div class="d-grid">
-                {{ template_form.submit(class="btn btn-primary mt-2") }}
+                {{ template_form.submit(class="btn btn-primary mt-4") }}
             </div>
         </form>
     </div>
