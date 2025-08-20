@@ -13,12 +13,12 @@
                     <span>Overweight level 1</span>
                 {% elif template_prediction == ['Overweight_Level_II'] %}
                     <span>Overweight level 2</span>
-                {% elif template_prediction == ['Obesity_Level_I'] %}
-                    <span>Obesity level 1</span>
-                {% elif template_prediction == ['Obesity_Level_II'] %}
-                    <span>Obesity level 2</span>
-                {% elif template_prediction == ['Obesity_Level_III'] %}
-                    <span>Obesity level 3</span>
+                {% elif template_prediction == ['Obesity_Type_I'] %}
+                    <span>Obesity type 1</span>
+                {% elif template_prediction == ['Obesity_Type_II'] %}
+                    <span>Obesity type 2</span>
+                {% elif template_prediction == ['Obesity_Type_III'] %}
+                    <span>Obesity type 3</span>
                 {% endif %}
             </div>
         </div>
@@ -45,20 +45,20 @@
                     {% else %}
                         <li class="list-group-item">Overweight level 2</li>
                     {% endif %}
-                    {% if template_prediction == ['Obesity_Level_I'] %}
-                        <li class="list-group-item active">Obesity level 1</li>
+                    {% if template_prediction == ['Obesity_Type_I'] %}
+                        <li class="list-group-item active">Obesity type 1</li>
                     {% else %}
-                        <li class="list-group-item">Obesity level 1</li>
+                        <li class="list-group-item">Obesity type 1</li>
                     {% endif %}
-                    {% if template_prediction == ['Obesity_Level_II'] %}
-                        <li class="list-group-item active">Obesity level 2</li>
+                    {% if template_prediction == ['Obesity_Type_II'] %}
+                        <li class="list-group-item active">Obesity type 2</li>
                     {% else %}
-                        <li class="list-group-item">Obesity level 2</li>
+                        <li class="list-group-item">Obesity type 2</li>
                     {% endif %}
-                    {% if template_prediction == ['Obesity_Level_III'] %}
-                        <li class="list-group-item active">Obesity level 3</li>
+                    {% if template_prediction == ['Obesity_Type_III'] %}
+                        <li class="list-group-item active">Obesity type 3</li>
                     {% else %}
-                        <li class="list-group-item">Obesity level 3</li>
+                        <li class="list-group-item">Obesity type 3</li>
                     {% endif %}
                 </ul>
             </div>
