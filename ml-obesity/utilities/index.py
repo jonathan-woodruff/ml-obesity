@@ -21,7 +21,9 @@ def fit_model():
 
     #Z-score normalize the features
     scaler = preprocessing.StandardScaler()
-    X_train = scaler.fit_transform(X_train)
+    X_train = scaler.fit_transform(X_train.values)
+
+    print(X_train)
 
     #Fit the model
     classifier = SVC(kernel="linear")
