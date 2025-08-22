@@ -29,7 +29,7 @@ I built this project to showcase my ML skills to prospective employers. Check ou
 
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) [2025] [Jonathan Woodruff]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
