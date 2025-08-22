@@ -8,10 +8,10 @@ I built this project to showcase my ML skills to prospective employers. Check ou
 
 ## How to use
 
-1 Create a virtual environment
-2 Dump the project files from this repository into the virtual environment, following the same file structure as this repository
-3 pip install dependencies
-4 flask run to run the project
+1. Create a virtual environment
+2. Dump the project files from this repository into the virtual environment, following the same file structure as this repository
+3. pip install dependencies
+4. flask run to run the project
 
 ## Versions
 * python (3.12.3)
